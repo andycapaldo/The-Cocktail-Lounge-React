@@ -5,19 +5,22 @@ import Cocktail from '../components/Cocktail';
 import { getUserCocktails } from '../lib/apiWrapper';
 import Button from 'react-bootstrap/Button';
 import CocktailForm from '../components/CocktailForm';
+import CategoryType from '../types/category';
 
 
 
 
 type CocktailsViewProps = {
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    flashMessage: (message:string, category: CategoryType) => void
 }
 
 
 
-export default function CocktailsView({ isLoggedIn }: CocktailsViewProps) {
+export default function CocktailsView({ isLoggedIn, flashMessage }: CocktailsViewProps) {
     const [cocktails, setCocktails] = useState<UserCocktailType[]>([]);
     const [displayForm, setDisplayForm] = useState(false);
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
 
     useEffect( () => {
@@ -29,7 +32,7 @@ export default function CocktailsView({ isLoggedIn }: CocktailsViewProps) {
         };
 
         fetchData()
-    }, [])
+    }, [formSubmitted])
 
     return (
         <>
@@ -38,7 +41,7 @@ export default function CocktailsView({ isLoggedIn }: CocktailsViewProps) {
                     {displayForm ? 'Hide Form' : '+ Create New Cocktail'}
                 </Button>}
 
-                {displayForm && <CocktailForm />}
+                {displayForm && <CocktailForm flashMessage={flashMessage} setDisplay={setDisplayForm} setForm={setFormSubmitted} toggle={formSubmitted} />}
             {cocktails.map((cocktail) => (
                 <Cocktail key={cocktail.id} cocktail={cocktail} />
             ))}

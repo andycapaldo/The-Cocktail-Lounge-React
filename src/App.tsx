@@ -70,7 +70,7 @@ function App() {
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} flashMessage={flashMessage} />} />
           <Route path='/home' element={<Home loggedInUser={loggedInUser} />} />
-          <Route path='/cocktails' element={<CocktailsView  isLoggedIn={isLoggedIn} />} />
+          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
         </Routes>
       </Container>
     </BrowserRouter>

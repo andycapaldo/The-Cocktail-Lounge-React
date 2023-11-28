@@ -3,13 +3,20 @@ import UserCocktailType from "../types/user_cocktail"
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import { createCocktail } from "../lib/apiWrapper";
+import CategoryType from "../types/category";
 
 
-type CocktailFormProps = {}
+type CocktailFormProps = {
+    flashMessage: (message:string, category: CategoryType) => void,
+    setDisplay: (display:boolean) => void,
+    setForm: (form:boolean) => void,
+    toggle: boolean
+}
 
 
 
-export default function CocktailForm({}: CocktailFormProps) {
+export default function CocktailForm({ flashMessage, setDisplay, setForm, toggle }: CocktailFormProps) {
     const [formData, setFormData] = useState<Partial<UserCocktailType>>({
         drinkName: '',
         glassType: '',
@@ -42,10 +49,23 @@ export default function CocktailForm({}: CocktailFormProps) {
         setFormData({...formData, [e.target.name]: e.target.value})
     }
 
+    const handleFormSubmit = async (e:React.FormEvent) => {
+        e.preventDefault();
+        const token = localStorage.getItem('token') || ''
+        const response = await createCocktail(token, formData);
+        if (response.error) {
+            flashMessage(response.error, 'danger');
+        } else {
+            flashMessage(`${response.data?.drinkName} has been created`, 'info')
+            setDisplay(false);
+            setForm(!toggle)
+        } 
+    }
+
   return (
     <Card>
     <Card.Body>
-        <Form>
+        <Form onSubmit={handleFormSubmit}>
             <Form.Label htmlFor='drinkName'>Drink Name</Form.Label>
             <Form.Control name='drinkName' placeholder='Enter Drink Name' onChange={handleInputChange} value={formData.drinkName} />
             <Form.Label htmlFor='glassType'>Glass Type</Form.Label>

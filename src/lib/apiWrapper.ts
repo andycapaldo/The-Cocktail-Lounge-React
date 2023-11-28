@@ -100,10 +100,27 @@ async function getMe(token:string): Promise<APIResponse<UserType>> {
     return {data, error}
 }
 
+async function createCocktail(token:string, formData: Partial<UserCockTailType>): Promise<APIResponse<UserCockTailType>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).post(cocktailEndpoint, formData);
+        data = response.data;
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
 
 export {
     getUserCocktails,
     createNewUser,
     login,
-    getMe
+    getMe,
+    createCocktail
 }
