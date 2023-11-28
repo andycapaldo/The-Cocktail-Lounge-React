@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import UserType from "../types/auth";
-import { login } from "../lib/apiWrapper";
+import { login, getMe } from "../lib/apiWrapper";
 import CategoryType from "../types/category";
 
 
 
 type LoginProps = {
-    logUserIn: (user:Partial<UserType>) => void,
+    logUserIn: (user:UserType) => void,
     isLoggedIn: boolean,
     flashMessage: (message:string, category:CategoryType) => void
 }
@@ -37,7 +37,8 @@ export default function Login({ logUserIn, isLoggedIn, flashMessage }: LoginProp
             flashMessage(response.error, 'warning')
         }else {
             localStorage.setItem('token', response.data?.token as string)
-            logUserIn(userFormData);
+            const response2 = await getMe(response.data?.token as string)
+            logUserIn(response2.data!)
             navigate('/home');
         }
     }

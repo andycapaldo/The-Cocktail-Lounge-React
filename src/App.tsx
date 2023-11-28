@@ -6,6 +6,7 @@ import Login from "./views/Login";
 import AlertMessage from "./components/AlertMessage";
 import SignUp from "./views/SignUp";
 import CocktailsView from "./views/CocktailsView";
+import EditCocktail from "./views/EditCocktail";
 
 
 import UserType from "./types/auth";
@@ -21,7 +22,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('token') ? true : false);
-  const [loggedInUser, setLoggedInUser] = useState<Partial<UserType>|null>(null)
+  const [loggedInUser, setLoggedInUser] = useState<UserType|null>(null)
   const [message, setMessage] = useState<string|null>(null);
   const [category, setCategory] = useState<CategoryType|null>(null);
 
@@ -42,7 +43,7 @@ function App() {
   }, [isLoggedIn])
 
 
-  const logUserIn = (user:Partial<UserType>):void => {
+  const logUserIn = (user:UserType):void => {
     setIsLoggedIn(true);
     setLoggedInUser(user);
     flashMessage(`${user.username} has been logged in`, 'success');
@@ -70,7 +71,8 @@ function App() {
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} flashMessage={flashMessage} />} />
           <Route path='/home' element={<Home loggedInUser={loggedInUser} />} />
-          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
+          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} currentUser={loggedInUser} />} />
+          <Route path='/cocktails/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
         </Routes>
       </Container>
     </BrowserRouter>

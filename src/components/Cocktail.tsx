@@ -1,3 +1,4 @@
+// Component to show the image and drink name for any given cocktails for the CocktailsView view
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
@@ -7,27 +8,13 @@ import UserCocktailType from "../types/user_cocktail"
 import UserType from "../types/auth";
 
 type CocktailProps = {
-    cocktail: UserCocktailType
+    cocktail: UserCocktailType,
+    currentUser: UserType|null
 }
 
 
 
-export default function Cocktail({ cocktail }: CocktailProps) {
-
-    const ingredients = [];
-    const measures = [];
-
-    for (let i = 1; i <= 10; i++) {
-        const ingredientKey = `ingredient${i}` as keyof UserCocktailType;
-        const measureKey = `measure${i}` as keyof UserCocktailType;
-
-        // Check if ingredient and measure properties exist and are not empty
-        if (cocktail[ingredientKey] && cocktail[measureKey]) {
-            ingredients.push(cocktail[ingredientKey]);
-            measures.push(cocktail[measureKey]);
-        }
-    }
-
+export default function Cocktail({ cocktail, currentUser }: CocktailProps) {
 
   return (
     <Col classsName='col-1'>
@@ -35,6 +22,11 @@ export default function Cocktail({ cocktail }: CocktailProps) {
             <Card.Body>
                 <Card.Img className="cocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
                 <Card.Title>{ cocktail.drinkName }</Card.Title>
+                {cocktail.author.id === currentUser?.id && (
+                    <Link to={`/cocktails/${cocktail.id}`}>
+                        <Button variant='light' className='mt-3'>Edit Cocktail</Button>
+                    </Link>
+                )}
             </Card.Body>
         </Card>
     </Col>
