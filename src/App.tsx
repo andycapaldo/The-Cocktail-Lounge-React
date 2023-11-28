@@ -5,6 +5,7 @@ import LandingPage from './views/LandingPage';
 import Login from "./views/Login";
 import AlertMessage from "./components/AlertMessage";
 import SignUp from "./views/SignUp";
+import CocktailsView from "./views/CocktailsView";
 
 
 import UserType from "./types/auth";
@@ -53,6 +54,7 @@ function App() {
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} />} />
           <Route path='/home' element={<Home loggedInUser={loggedInUser} />} />
+          <Route path='/cocktails' element={<CocktailsView />} />
         </Routes>
       </Container>
     </BrowserRouter>
