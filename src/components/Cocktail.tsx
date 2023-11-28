@@ -27,12 +27,13 @@ export default function Cocktail({ cocktail }: CocktailProps) {
         }
     }
 
+
   return (
     <Card className='my-3'>
         <Card.Body>
             <Card.Title>{ cocktail.drinkName }</Card.Title>
             <Card.Img src={ cocktail.imageUrl }></Card.Img>
-            <Card.Text>Type - {'Alcoholic' ? cocktail.drinkType : 'Non-Alcoholic'}</Card.Text>
+            <Card.Text>Type - {cocktail.drinkType ? 'Alocholic' : 'Non-Alcoholic'}</Card.Text>
             <Card.Text>Served in - { cocktail.glassType }</Card.Text>
             <h4>Ingredients</h4>
             <ul>
