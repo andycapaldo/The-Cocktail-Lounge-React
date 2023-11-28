@@ -2,15 +2,18 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
 import UserType from '../types/auth';
+import { createNewUser, login } from '../lib/apiWrapper';
+import CategoryType from '../types/category';
 
 
 type SignUpProps = {
-    logUserIn: (user:Partial<UserType>) => void
+    logUserIn: (user:Partial<UserType>) => void,
+    flashMessage: (message: string, category:CategoryType) => void
 }
 
 
 
-export default function SignUp({ logUserIn }: SignUpProps) {
+export default function SignUp({ logUserIn, flashMessage }: SignUpProps) {
 
     const navigate = useNavigate();
 
@@ -29,10 +32,18 @@ export default function SignUp({ logUserIn }: SignUpProps) {
         setUserFormData({...userFormData, [e.target.name]: e.target.value})
     }
 
-    const handleFormSubmit = (e: React.FormEvent): void => {
+    const handleFormSubmit = async (e: React.FormEvent): Promise<void> => {
         e.preventDefault();
-        logUserIn(userFormData);
-        navigate('/home')
+        const response = await createNewUser(userFormData);
+        if (response.error){
+            flashMessage(response.error, 'danger')
+        } else {
+            const newUser = response.data!
+            const newUserTokenResponse = await login(userFormData.username!, userFormData.password!)
+            localStorage.setItem('token', newUserTokenResponse.data?.token!)
+            logUserIn(newUser);
+            navigate('/home');
+        }
     }
 
     

@@ -1,27 +1,47 @@
 import { useState, useEffect } from 'react';
-import UserCockTailType from '../types/user_cocktail';
+import { useNavigate } from 'react-router-dom';
+import UserCocktailType from '../types/user_cocktail';
 import Cocktail from '../components/Cocktail';
+import { getUserCocktails } from '../lib/apiWrapper';
+import Button from 'react-bootstrap/Button';
+import CocktailForm from '../components/CocktailForm';
 
 
-type CocktailsViewProps = {}
+
+
+type CocktailsViewProps = {
+    isLoggedIn: boolean
+}
 
 
 
-export default function CocktailsView({}: CocktailsViewProps) {
-    const [cocktails, setCocktails] = useState<UserCockTailType[]>([]);
+export default function CocktailsView({ isLoggedIn }: CocktailsViewProps) {
+    const [cocktails, setCocktails] = useState<UserCocktailType[]>([]);
+    const [displayForm, setDisplayForm] = useState(false);
+
 
     useEffect( () => {
-        fetch('https://the-cocktail-lounge.onrender.com/api/cocktails')
-            .then(res => res.json())
-            .then(data => setCocktails(data))
+        async function fetchData(){
+            const response = await getUserCocktails();
+            if (response.data){
+                setCocktails(response.data)
+            }
+        };
+
+        fetchData()
     }, [])
 
-  return (
-    <>
-        <h2>Cocktails</h2>
-        {cocktails.map((cocktail) => (
-            <Cocktail key={cocktail.id} cocktail={cocktail} />
-        ))}
-    </>
-  )
+    return (
+        <>
+            <h2>Cocktails</h2>
+            { isLoggedIn && <Button variant='success' onClick={() => setDisplayForm(!displayForm)}>
+                    {displayForm ? 'Hide Form' : '+ Create New Cocktail'}
+                </Button>}
+
+                {displayForm && <CocktailForm />}
+            {cocktails.map((cocktail) => (
+                <Cocktail key={cocktail.id} cocktail={cocktail} />
+            ))}
+        </>
+    )
 }

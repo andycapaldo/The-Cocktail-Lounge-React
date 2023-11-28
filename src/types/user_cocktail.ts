@@ -1,6 +1,6 @@
 import UserType from "./auth";
 
-type UserCockTailType = {
+type UserCocktailType = {
     id: number,
     drinkName: string,
     glassType: string,
@@ -31,4 +31,4 @@ type UserCockTailType = {
     measure10: string,
 }
 
-export default UserCockTailType
+export default UserCocktailType
