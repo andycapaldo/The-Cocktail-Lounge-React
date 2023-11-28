@@ -105,6 +105,13 @@ body {
 
 
 .cocktailsViewImg{
-    max-width: 500px;
-    max-height: 500px;
+    height: 300px;
+    width: 300px;
+}
+
+
+.cocktailsViewCard {
+    background-color: #000c19;
+    color: #be4232;
+    width: 25rem;
 }

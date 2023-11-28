@@ -6,6 +6,7 @@ import { getUserCocktails } from '../lib/apiWrapper';
 import Button from 'react-bootstrap/Button';
 import CocktailForm from '../components/CocktailForm';
 import CategoryType from '../types/category';
+import { Row } from 'react-bootstrap';
 
 
 
@@ -36,6 +37,7 @@ export default function CocktailsView({ isLoggedIn, flashMessage }: CocktailsVie
 
     return (
         <>
+        <Row>
             <h2>Cocktails</h2>
             { isLoggedIn && <Button variant='success' onClick={() => setDisplayForm(!displayForm)}>
                     {displayForm ? 'Hide Form' : '+ Create New Cocktail'}
@@ -45,6 +47,7 @@ export default function CocktailsView({ isLoggedIn, flashMessage }: CocktailsVie
             {cocktails.map((cocktail) => (
                 <Cocktail key={cocktail.id} cocktail={cocktail} />
             ))}
+        </Row>
         </>
     )
 }

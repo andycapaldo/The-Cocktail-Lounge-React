@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { Row, Col } from 'react-bootstrap';
 
 import UserCocktailType from "../types/user_cocktail"
 import UserType from "../types/auth";
@@ -29,27 +30,13 @@ export default function Cocktail({ cocktail }: CocktailProps) {
 
 
   return (
-    <Card className='my-5'>
-        <Card.Body>
-            <Card.Title>{ cocktail.drinkName }</Card.Title>
-            <Card.Img className="cocktailsViewImg" src={ cocktail.imageUrl }></Card.Img>
-            <Card.Text>Type - {cocktail.drinkType ? 'Alocholic' : 'Non-Alcoholic'}</Card.Text>
-            <Card.Text>Served in - { cocktail.glassType }</Card.Text>
-            <h4>Ingredients</h4>
-            <ul>
-                {ingredients.map((ingredient, index) => (
-                    <li key={index}>{String(ingredient)}</li>
-                ))}
-            </ul>
-            <h4>Measures</h4>
-            <ul>
-                {measures.map((measure, index) => (
-                    <li key={index}>{String(measure)}</li>
-                ))}
-            </ul>
-            <Card.Text>Instructions: {cocktail.instructions}</Card.Text>
-            <Card.Subtitle>By {cocktail.author.username}</Card.Subtitle>
-        </Card.Body>
-    </Card>
+    <Col classsName='col-1'>
+        <Card className='my-5 cocktailsViewCard'>
+            <Card.Body>
+                <Card.Img className="cocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
+                <Card.Title>{ cocktail.drinkName }</Card.Title>
+            </Card.Body>
+        </Card>
+    </Col>
   )
 }
