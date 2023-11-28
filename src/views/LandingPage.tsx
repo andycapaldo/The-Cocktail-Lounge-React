@@ -1,6 +1,5 @@
 import { Button, Container, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import "./LandingStyles.css";
 import logo from '/logo.svg'
 
 type LandingPageProps = {}

@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Container, Row, Col, Form, Card } from "react-bootstrap";
-import UserType from "../../types/auth";
-import './LoginStyles.css';
-import CategoryType from "../../types/category";
+import UserType from "../types/auth";
+
+
 
 type LoginProps = {
     logUserIn: (user:Partial<UserType>) => void,
-    // isLoggedIn: boolean,
-    // flashMessage: (message:string, category:CategoryType) => void
+    isLoggedIn: boolean
 }
 
 
-export default function Login({ logUserIn }: LoginProps) {
+export default function Login({ logUserIn, isLoggedIn }: LoginProps) {
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (isLoggedIn){
+            navigate('/home')
+        }
+    })
 
     const [userFormData, setUserFormData] = useState<Partial<UserType>>({username:'', password:''})
 
@@ -25,13 +30,14 @@ export default function Login({ logUserIn }: LoginProps) {
     const handleFormSubmit = (e: React.FormEvent): void => {
         e.preventDefault();
         logUserIn(userFormData);
-        navigate('/')
+        navigate('/home');
     }
+
 
 return (
         <>
-            <Container>
-                <Card>
+            <Container className="loginSignUpContainer">
+                <Card className="loginSignUpCard">
                     <Card.Body>
                         <Row>
                             <Col >
