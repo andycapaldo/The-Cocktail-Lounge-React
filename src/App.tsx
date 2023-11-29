@@ -76,7 +76,7 @@ function App() {
           <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/editcocktail/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
           <Route path='usercocktail/:cocktailId' element={<UserCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
-          <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} />} />
+          <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} flashMessage={flashMessage} />} />
         </Routes>
       </Container>
     </BrowserRouter>

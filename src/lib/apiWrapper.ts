@@ -233,6 +233,22 @@ async function deleteComment(token:string, commentId: string): Promise<APIRespon
     return {data, error}
 }
 
+async function editProfile(token:string, userId: string, editedUserData: Partial<UserType>): Promise<APIResponse<UserType>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).put(userEndpoint + '/' + userId, editedUserData);
+        data = response.data;
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
 
 export {
     getUserCocktails,
@@ -246,5 +262,6 @@ export {
     deleteCocktail,
     getCommentsOnCocktail,
     createComment,
-    deleteComment
+    deleteComment,
+    editProfile
 }
