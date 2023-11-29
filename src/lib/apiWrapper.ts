@@ -2,12 +2,14 @@ import axios from 'axios';
 import APIResponse from '../types/api';
 import UserType from '../types/auth';
 import UserCockTailType from '../types/user_cocktail';
+import CommentType from '../types/comment';
 
 
 const base: string = 'https://the-cocktail-lounge.onrender.com/api'
 const cocktailEndpoint: string = '/cocktails'
 const userEndpoint: string = '/users'
 const tokenEndpoint: string = '/token'
+const commentEndpoint: string = '/comments'
 
 
 const apiClientNoAuth = () => axios.create(
@@ -165,6 +167,22 @@ async function deleteCocktail(token:string, cocktailId:string): Promise<APIRespo
     return {data, error}
 }
 
+async function getCommentsOnCocktail(cocktailId:string): Promise<APIResponse<CommentType[]>> {
+    let data;
+    let error;
+    try {
+        const response = await apiClientNoAuth().get(commentEndpoint + '/' + cocktailId);
+        data = response.data
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.message
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
 
 export {
     getUserCocktails,
@@ -174,5 +192,6 @@ export {
     getMe,
     createCocktail,
     editCocktail,
-    deleteCocktail
+    deleteCocktail,
+    getCommentsOnCocktail
 }

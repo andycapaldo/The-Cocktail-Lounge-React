@@ -5,15 +5,18 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getUserCocktail } from '../lib/apiWrapper';
+import { getUserCocktail, getCommentsOnCocktail } from '../lib/apiWrapper';
 import UserCocktailType from "../types/user_cocktail";
 import CategoryType from '../types/category';
+import CommentType from '../types/comment';
 import UserCocktail from '../components/UserCocktail'
 import UserType from '../types/auth';
 import { Link } from 'react-router-dom';
 import { Button } from 'react-bootstrap';
 import { deleteCocktail } from '../lib/apiWrapper';
 import { Modal } from 'react-bootstrap';
+import Comment from '../components/Comment';
+import { Row, Col } from 'react-bootstrap';
 
 
 type UserCocktailProps = {
@@ -27,6 +30,7 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
     const { cocktailId } = useParams();
     const navigate = useNavigate();
     const [cocktailToView, setCocktailToView] = useState<UserCocktailType|null>(null);
+    const [commentsToView, setCommentsToView] = useState<CommentType[]|null>(null);
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
@@ -45,6 +49,19 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
         getCocktailToView();
     }, [cocktailId])
 
+    useEffect( () => {
+        async function getComments(){
+            const response = await getCommentsOnCocktail(cocktailId!);
+            if (response.error){
+                console.warn(response.error)
+            } else {
+                setCommentsToView(response.data!);
+            }
+        }
+
+        getComments();
+    }, [cocktailId])
+
 
     const handleDeleteCocktail = async () => {
         const token = localStorage.getItem('token') || ''
@@ -56,20 +73,23 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
             navigate('/cocktails')
         }
     }
-
-    
     return (
         <>
             <UserCocktail cocktail={cocktailToView} />
+            <Comment currentUser={currentUser} comments={commentsToView}></Comment>
             {currentUser?.id === cocktailToView?.author.id && (
-                <div>
-                    <Link to={`/editcocktail/${cocktailToView?.id}`}>
-                            <Button variant='light' className='mt-3 w-50'>Edit Cocktail</Button>
-                    </Link>
-                    <div>
-                    <Button onClick={handleShow} variant='danger' className='mt-3 w-50'>Delete Cocktail</Button>
-                    </div>
-                </div>
+                <>
+                    <Row>
+                        <Col className='d-flex justify-content-center align-items-center'>
+                        <Link to={`/editcocktail/${cocktailToView?.id}`}>
+                            <Button variant='light' className='mt-3 w-100'>Edit Cocktail</Button>
+                        </Link>
+                        </Col>
+                        <Col className='d-flex justify-content-center align-items-center'>
+                            <Button onClick={handleShow} variant='danger' className='mt-3 w-50'>Delete Cocktail</Button>
+                        </Col>
+                    </Row>
+                </>
             )}
             <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
