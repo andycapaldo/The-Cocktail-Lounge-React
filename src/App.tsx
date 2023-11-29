@@ -8,6 +8,7 @@ import SignUp from "./views/SignUp";
 import CocktailsView from "./views/CocktailsView";
 import EditCocktail from "./views/EditCocktail";
 import UserCocktail from "./views/UserCocktailView";
+import Profile from "./views/Profile";
 
 
 import UserType from "./types/auth";
@@ -72,9 +73,10 @@ function App() {
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} flashMessage={flashMessage} />} />
           <Route path='/home' element={<Home loggedInUser={loggedInUser} />} />
-          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} currentUser={loggedInUser} />} />
+          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/editcocktail/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
           <Route path='usercocktail/:cocktailId' element={<UserCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
+          <Route path='/profile' element={<Profile loggedInUser={loggedInUser} />} />
         </Routes>
       </Container>
     </BrowserRouter>
