@@ -66,7 +66,7 @@ function App() {
   return (
     <BrowserRouter>
       <Container>
-        {isLoggedIn && <Header isLoggedIn={isLoggedIn} handleLogOut={logUserOut}></Header>}
+        {isLoggedIn && <Header loggedInUser={loggedInUser} isLoggedIn={isLoggedIn} handleLogOut={logUserOut}></Header>}
         {message && category && <AlertMessage message={message} category={category} flashMessage={flashMessage} />}
         <Routes>
           <Route path='/' element={<LandingPage/>}/>
@@ -76,7 +76,7 @@ function App() {
           <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/editcocktail/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
           <Route path='usercocktail/:cocktailId' element={<UserCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
-          <Route path='/profile' element={<Profile loggedInUser={loggedInUser} />} />
+          <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} />} />
         </Routes>
       </Container>
     </BrowserRouter>

@@ -1,5 +1,6 @@
 import UserCocktailType from "../types/user_cocktail";
 import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 
 
@@ -48,7 +49,7 @@ export default function CocktailView({ cocktail }: CocktailDetailsProps) {
                     ))}
                 </ul>
                 <Card.Text>Instructions: {cocktail!.instructions}</Card.Text>
-                <Card.Subtitle>By {cocktail!.author.username}</Card.Subtitle>
+                <Card.Subtitle>By <Link to={`/profile/${cocktail.author.id}`}>{cocktail!.author.username}</Link></Card.Subtitle>
             </Card.Body>
         </Card>
     </>

@@ -119,6 +119,22 @@ async function getMe(token:string): Promise<APIResponse<UserType>> {
     return {data, error}
 }
 
+async function getUser(userId: string): Promise<APIResponse<UserType>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientNoAuth().get(userEndpoint + '/' + userId)
+        data = response.data
+    } catch (err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
 async function createCocktail(token:string, formData: Partial<UserCockTailType>): Promise<APIResponse<UserCockTailType>> {
     let data;
     let error;
@@ -224,6 +240,7 @@ export {
     createNewUser,
     login,
     getMe,
+    getUser,
     createCocktail,
     editCocktail,
     deleteCocktail,

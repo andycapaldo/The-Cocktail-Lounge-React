@@ -140,7 +140,7 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
                         Close
                     </Button>
                     <Button variant="danger" onClick={handleDeleteCocktail}>
-                        Delete Post
+                        Delete Cocktail
                     </Button>
                 </Modal.Footer>
             </Modal>
