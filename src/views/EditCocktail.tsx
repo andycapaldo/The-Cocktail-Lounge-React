@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import UserCocktailType from '../types/user_cocktail';
-import { getUserCocktail, editCocktail } from '../lib/apiWrapper';
+import { getUserCocktail, editCocktail, deleteCocktail } from '../lib/apiWrapper';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
+import Modal from 'react-bootstrap/Modal';
 import UserType from '../types/auth';
 import CategoryType from '../types/category';
 
@@ -60,7 +61,6 @@ export default function EditCocktail({ currentUser, flashMessage }: EditCocktail
             navigate('/cocktails')
         }
     }
-
 
   return (
     <>
@@ -132,7 +132,6 @@ export default function EditCocktail({ currentUser, flashMessage }: EditCocktail
                     <Form.Check onChange={handleInputChange} type="checkbox" inline label="Alcoholic?" name='drinkType' id='inline-checkbox-1'></Form.Check>
 
                     <Button variant='success' className='mt-3 w-50' type='submit'>Edit Cocktail</Button>
-                    <Button variant='danger' className='mt-3 w-50'>Delete Cocktail</Button>
                 </Form>
             </Card.Body>
         </Card>

@@ -22,8 +22,11 @@ export default function Cocktail({ cocktail, currentUser }: CocktailProps) {
             <Card.Body>
                 <Card.Img className="cocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
                 <Card.Title>{ cocktail.drinkName }</Card.Title>
+                <Link to={`/usercocktail/${cocktail.id}`} >
+                    <Button variant='dark' className='mt-3'>View More</Button>
+                </Link>
                 {cocktail.author.id === currentUser?.id && (
-                    <Link to={`/cocktails/${cocktail.id}`}>
+                    <Link to={`/editcocktail/${cocktail.id}`}>
                         <Button variant='light' className='mt-3'>Edit Cocktail</Button>
                     </Link>
                 )}

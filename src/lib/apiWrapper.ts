@@ -149,6 +149,23 @@ async function editCocktail(token:string, cocktailId:string, editedCocktailData:
 }
 
 
+async function deleteCocktail(token:string, cocktailId:string): Promise<APIResponse<{success:string}>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).delete(cocktailEndpoint + '/' + cocktailId);
+        data = response.data;
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
+
 export {
     getUserCocktails,
     getUserCocktail,
@@ -156,5 +173,6 @@ export {
     login,
     getMe,
     createCocktail,
-    editCocktail
+    editCocktail,
+    deleteCocktail
 }
