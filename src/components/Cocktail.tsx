@@ -9,27 +9,21 @@ import UserType from "../types/auth";
 
 type CocktailProps = {
     cocktail: UserCocktailType,
-    currentUser: UserType|null
 }
 
 
 
-export default function Cocktail({ cocktail, currentUser }: CocktailProps) {
+export default function Cocktail({ cocktail }: CocktailProps) {
 
   return (
     <Col classsName='col-1'>
         <Card className='my-5 cocktailsViewCard'>
             <Card.Body>
-                <Card.Img className="cocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
+                <Card.Img className="allUserCocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
                 <Card.Title>{ cocktail.drinkName }</Card.Title>
                 <Link to={`/usercocktail/${cocktail.id}`} >
                     <Button variant='dark' className='mt-3'>View More</Button>
                 </Link>
-                {cocktail.author.id === currentUser?.id && (
-                    <Link to={`/editcocktail/${cocktail.id}`}>
-                        <Button variant='light' className='mt-3'>Edit Cocktail</Button>
-                    </Link>
-                )}
             </Card.Body>
         </Card>
     </Col>

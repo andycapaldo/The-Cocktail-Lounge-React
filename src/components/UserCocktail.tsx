@@ -1,7 +1,5 @@
 import UserCocktailType from "../types/user_cocktail";
 import Card from 'react-bootstrap/Card';
-import UserType from "../types/auth";
-import CategoryType from "../types/category";
 
 
 

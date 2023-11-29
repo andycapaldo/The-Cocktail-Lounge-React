@@ -1,11 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import UserCocktailType from '../types/user_cocktail';
-import { getUserCocktail, editCocktail, deleteCocktail } from '../lib/apiWrapper';
+import { getUserCocktail, editCocktail } from '../lib/apiWrapper';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Form from 'react-bootstrap/Form';
-import Modal from 'react-bootstrap/Modal';
 import UserType from '../types/auth';
 import CategoryType from '../types/category';
 

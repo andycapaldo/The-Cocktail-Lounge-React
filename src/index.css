@@ -1,5 +1,5 @@
 body {
-    background-color: #000c19 !important;
+    background-color: #000c19;
     color: #be4232 !important;
     font-family: monospace !important;
 }
@@ -105,6 +105,11 @@ body {
 
 
 .cocktailsViewImg{
+    height: 500px;
+    width: 500px;
+}
+
+.allUserCocktailsViewImg {
     height: 300px;
     width: 300px;
 }
@@ -118,4 +123,14 @@ body {
 
 .addACommentInput > textarea {
     background-color: white;
+}
+
+.createCocktailBtn {
+    width: 50%;
+}
+
+.createCocktailBtnCol {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

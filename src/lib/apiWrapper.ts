@@ -10,6 +10,7 @@ const cocktailEndpoint: string = '/cocktails'
 const userEndpoint: string = '/users'
 const tokenEndpoint: string = '/token'
 const commentEndpoint: string = '/comments'
+const deleteCommentEndpoint: string = '/comment'
 
 
 const apiClientNoAuth = () => axios.create(
@@ -200,6 +201,22 @@ async function createComment(token:string, cocktailId:string, commentData: Parti
     return {data, error}
 }
 
+async function deleteComment(token:string, commentId: string): Promise<APIResponse<{success:string}>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).delete(deleteCommentEndpoint + '/' + commentId);
+        data = response.data;
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
 
 export {
     getUserCocktails,
@@ -211,5 +228,6 @@ export {
     editCocktail,
     deleteCocktail,
     getCommentsOnCocktail,
-    createComment
+    createComment,
+    deleteComment
 }
