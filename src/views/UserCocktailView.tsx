@@ -5,7 +5,7 @@
 
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getUserCocktail, getCommentsOnCocktail } from '../lib/apiWrapper';
+import { getUserCocktail, getCommentsOnCocktail, createComment } from '../lib/apiWrapper';
 import UserCocktailType from "../types/user_cocktail";
 import CategoryType from '../types/category';
 import CommentType from '../types/comment';
@@ -31,10 +31,34 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
     const navigate = useNavigate();
     const [cocktailToView, setCocktailToView] = useState<UserCocktailType|null>(null);
     const [commentsToView, setCommentsToView] = useState<CommentType[]|null>(null);
+    const [newComment, setNewComment] = useState<Partial<CommentType>>({text: ""});
+
+    const onChangeHandler = (e:React.ChangeEvent<HTMLTextAreaElement>) => {
+        setNewComment({...newComment, text: e.target.value});
+    };
+    
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const handleSubmitComment = async (e:React.MouseEvent) => {
+        e.preventDefault();
+        if (newComment.text!.trim().length === 0){
+            flashMessage('You cannot submit an empty comment!', 'warning')
+        } else {
+        const token = localStorage.getItem('token') || ''
+        const response = await createComment(token, cocktailId!, newComment);
+
+        if (response.error){
+            console.warn(response.error);
+        } else {
+            flashMessage('Comment has been added!', 'success')
+            setNewComment({text: ""})
+            navigate(`/usercocktail/${cocktailId}`)
+            }
+        }
+    };
 
     useEffect( () => {
         async function getCocktailToView(){
@@ -73,10 +97,23 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
             navigate('/cocktails')
         }
     }
+
+
     return (
         <>
             <UserCocktail cocktail={cocktailToView} />
             <Comment currentUser={currentUser} comments={commentsToView}></Comment>
+            {currentUser && (
+                <>
+                    <div className='comment-flexbox addACommentInput'>
+                        <h3 className='comment-text mt-5'>Leave a Comment</h3>
+                        <textarea value={newComment.text} onChange={onChangeHandler} className='input-box'></textarea>
+                    </div>
+                    <div className='d-flex justify-content-center'>
+                        <Button onClick={handleSubmitComment}>Submit</Button>
+                    </div>
+                </>
+            )}
             {currentUser?.id === cocktailToView?.author.id && (
                 <>
                     <Row>

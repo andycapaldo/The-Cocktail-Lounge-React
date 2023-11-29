@@ -115,3 +115,7 @@ body {
     color: #be4232;
     width: 25rem;
 }
+
+.addACommentInput > textarea {
+    background-color: white;
+}
