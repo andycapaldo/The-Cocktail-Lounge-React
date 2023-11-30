@@ -46,23 +46,46 @@ export default function CocktailForm({ flashMessage, setDisplay, setForm, toggle
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFormData({...formData, [e.target.name]: e.target.value})
+        const { name, value, type, checked } = e.target;
+
+        if (type === 'checkbox'){
+            setFormData({ ...formData, [name]: checked });
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     }
 
     const handleFormSubmit = async (e:React.FormEvent) => {
         e.preventDefault();
-        const token = localStorage.getItem('token') || ''
-        const response = await createCocktail(token, formData);
-        if (response.error) {
-            flashMessage(response.error, 'danger');
-        } else {
-            flashMessage(`${response.data?.drinkName} has been created`, 'info')
-            setDisplay(false);
-            setForm(!toggle)
+
+        const requiredFields = [
+            'drinkName',
+            'glassType',
+            'instructions',
+            'imageUrl',
+            'ingredient1',
+            'measure1',
+            'ingredient2',
+            'measure2',
+        ];
+        const emptyFields = requiredFields.filter(field => !formData[field as keyof UserCocktailType]);
+        if (emptyFields.length > 0) {
+            const emptyFieldsMessage = `Please fill in the following fields: ${emptyFields.join(', ')}`;
+            flashMessage(emptyFieldsMessage, 'danger');
+            } else {
+                const token = localStorage.getItem('token') || ''
+                const response = await createCocktail(token, formData);
+                if (response.error) {
+                    flashMessage(response.error, 'danger');
+                } else {
+                    flashMessage(`${response.data?.drinkName} has been created`, 'info')
+                    setDisplay(false);
+                    setForm(!toggle)
+            }
         } 
     }
 
-  return (
+return (
     <Card>
     <Card.Body>
         <Form onSubmit={handleFormSubmit}>
@@ -126,7 +149,7 @@ export default function CocktailForm({ flashMessage, setDisplay, setForm, toggle
             <Form.Label htmlFor='imageUrl'>Image URL</Form.Label>
             <Form.Control name='imageUrl' placeholder='Enter Image URL' onChange={handleInputChange} value={formData.imageUrl} />
             <Form.Label htmlFor='drinkType'>Drink Type</Form.Label>
-            <Form.Check type="checkbox" inline label="Alcoholic?" name='drinkType' id='inline-checkbox-1'></Form.Check>
+            <Form.Check type="checkbox" inline label="Alcoholic?" name='drinkType' id='inline-checkbox-1' checked={formData.drinkType as boolean} onChange={handleInputChange}></Form.Check>
 
             <Button variant='primary' className='w-100 mt-3' type='submit'>Create Cocktail</Button>
         </Form>

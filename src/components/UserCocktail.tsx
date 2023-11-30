@@ -34,7 +34,7 @@ export default function CocktailView({ cocktail }: CocktailDetailsProps) {
             <Card.Body>
                 <Card.Title>{ cocktail!.drinkName }</Card.Title>
                 <Card.Img className="cocktailsViewImg" src={ cocktail!.imageUrl }></Card.Img>
-                <Card.Text>Type - {cocktail!.drinkType ? 'Alocholic' : 'Non-Alcoholic'}</Card.Text>
+                <Card.Text>Type - {cocktail!.drinkType === true ? 'Alocholic' : 'Non-Alcoholic'}</Card.Text>
                 <Card.Text>Served in - { cocktail!.glassType }</Card.Text>
                 <h4>Ingredients</h4>
                 <ul>

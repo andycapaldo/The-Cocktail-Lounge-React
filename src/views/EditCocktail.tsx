@@ -52,7 +52,13 @@ export default function EditCocktail({ currentUser, flashMessage }: EditCocktail
     }, [cocktailToEdit, currentUser])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setCocktailToEdit({...cocktailToEdit!, [e.target.name]: e.target.value})
+        const { name, value, type, checked } = e.target;
+
+        if (type === 'checkbox'){
+            setCocktailToEdit({ ...cocktailToEdit!, [name]: checked });
+        } else {
+            setCocktailToEdit({ ...cocktailToEdit!, [name]: value });
+        }
     }
 
     const handleFormSubmit = async (e:React.FormEvent) => {
@@ -134,7 +140,7 @@ export default function EditCocktail({ currentUser, flashMessage }: EditCocktail
                     <Form.Label htmlFor='imageUrl'>Image URL</Form.Label>
                     <Form.Control onChange={handleInputChange} name='imageUrl' value={cocktailToEdit.imageUrl} />
                     <Form.Label htmlFor='drinkType'>Drink Type</Form.Label>
-                    <Form.Check onChange={handleInputChange} type="checkbox" inline label="Alcoholic?" name='drinkType' id='inline-checkbox-1'></Form.Check>
+                    <Form.Check onChange={handleInputChange} type="checkbox" inline label="Alcoholic?" name='drinkType' id='inline-checkbox-1' checked={cocktailToEdit.drinkType as boolean}></Form.Check>
 
                     <Button variant='success' className='mt-3 w-50' type='submit'>Edit Cocktail</Button>
                 </Form>

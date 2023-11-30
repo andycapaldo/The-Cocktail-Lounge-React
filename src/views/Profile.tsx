@@ -35,11 +35,6 @@ export default function Profile({ loggedInUser, flashMessage}: ProfileProps) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    useEffect(() => {
-        if (!loggedInUser){
-            navigate('/')
-        }
-    }, [loggedInUser])
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -91,6 +86,7 @@ export default function Profile({ loggedInUser, flashMessage}: ProfileProps) {
             flashMessage(response.error, 'danger')
         } else {
             flashMessage(response.data?.success!, 'primary')
+            loggedInUser = null;
             navigate('/')
         }
     }
