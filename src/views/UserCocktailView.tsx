@@ -42,6 +42,12 @@ export default function UserCocktailView({ currentUser, flashMessage }: UserCock
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    useEffect(() => {
+        if (!currentUser){
+            navigate('/')
+        }
+    }, [currentUser])
+
     const handleSubmitComment = async (e:React.MouseEvent) => {
         e.preventDefault();
         if (newComment.text!.trim().length === 0){

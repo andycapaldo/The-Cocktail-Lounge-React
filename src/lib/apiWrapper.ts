@@ -250,6 +250,23 @@ async function editProfile(token:string, userId: string, editedUserData: Partial
 }
 
 
+async function deleteProfile(token:string, userId: string): Promise<APIResponse<{success: string}>> {
+    let data;
+    let error;
+    try{
+        const response = await apiClientTokenAuth(token).delete(userEndpoint + '/' + userId);
+        data = response.data;
+    } catch(err) {
+        if (axios.isAxiosError(err)){
+            error = err.response?.data.error
+        } else {
+            error = 'Something went wrong'
+        }
+    }
+    return {data, error}
+}
+
+
 export {
     getUserCocktails,
     getUserCocktail,
@@ -263,5 +280,6 @@ export {
     getCommentsOnCocktail,
     createComment,
     deleteComment,
-    editProfile
+    editProfile,
+    deleteProfile
 }

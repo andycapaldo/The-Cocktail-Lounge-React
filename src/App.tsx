@@ -37,6 +37,7 @@ function App() {
           setLoggedInUser(response.data)
         } else {
           console.error(response.error)
+          logUserOut();
         }
       }
     }

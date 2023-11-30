@@ -23,7 +23,7 @@ export default function ProfileEdit({ formData, handleInputChange, handleFormSub
                         value={formData.email || ''}
                     />
                     <Button variant='success' className='mt-3 w-50' type='submit'>
-                        Edit Cocktail
+                        Edit Profile
                     </Button>
                 </Form>
             </Card.Body>

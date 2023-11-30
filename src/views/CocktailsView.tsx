@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserCocktailType from '../types/user_cocktail';
 import Cocktail from '../components/Cocktail';
 import { getUserCocktails } from '../lib/apiWrapper';
@@ -21,6 +22,13 @@ export default function CocktailsView({ isLoggedIn, flashMessage }: CocktailsVie
     const [cocktails, setCocktails] = useState<UserCocktailType[]>([]);
     const [displayForm, setDisplayForm] = useState(false);
     const [formSubmitted, setFormSubmitted] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!isLoggedIn){
+            navigate('/')
+        }
+    }, [isLoggedIn])
 
 
     useEffect( () => {
