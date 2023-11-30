@@ -119,6 +119,7 @@ body {
     background-color: #000c19;
     color: #be4232;
     width: 25rem;
+    border: none;
 }
 
 .addACommentInput > textarea {
@@ -133,4 +134,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.cocktailDbImgHomePage {
+    height: 300px;
+    width: 300px;
+}
+
+.paginationButtonHome{
+    height: 50px;
+    width: 50px;
 }

@@ -2,7 +2,7 @@
 import { Link } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Row, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
 import UserCocktailType from "../types/user_cocktail"
 import UserType from "../types/auth";

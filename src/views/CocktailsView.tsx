@@ -1,3 +1,4 @@
+// View that shows all user submitted cocktails
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UserCocktailType from '../types/user_cocktail';

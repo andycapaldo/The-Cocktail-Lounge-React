@@ -1,3 +1,5 @@
+// View for specific user created cocktails, showing details of the drink like ingredients, instructions etc.
+
 import UserCocktailType from "../types/user_cocktail";
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
@@ -34,7 +36,7 @@ export default function CocktailView({ cocktail }: CocktailDetailsProps) {
             <Card.Body>
                 <Card.Title>{ cocktail!.drinkName }</Card.Title>
                 <Card.Img className="cocktailsViewImg" src={ cocktail!.imageUrl }></Card.Img>
-                <Card.Text>Type - {cocktail!.drinkType === true ? 'Alocholic' : 'Non-Alcoholic'}</Card.Text>
+                <Card.Text>Type - {cocktail!.drinkType === true ? 'Alcoholic' : 'Non-Alcoholic'}</Card.Text>
                 <Card.Text>Served in - { cocktail!.glassType }</Card.Text>
                 <h4>Ingredients</h4>
                 <ul>
