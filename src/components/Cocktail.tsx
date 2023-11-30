@@ -20,7 +20,7 @@ export default function Cocktail({ cocktail }: CocktailProps) {
         <Card className='my-5 cocktailsViewCard'>
             <Card.Body>
                 <Card.Img className="allUserCocktailsViewImg img-fluid" src={ cocktail.imageUrl }></Card.Img>
-                <Card.Title>{ cocktail.drinkName }</Card.Title>
+                <Card.Title className='mt-3'>{ cocktail.drinkName }</Card.Title>
                 <Link to={`/usercocktail/${cocktail.id}`} >
                     <Button variant='dark' className='mt-3'>View More</Button>
                 </Link>

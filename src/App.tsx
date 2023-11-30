@@ -20,6 +20,7 @@ import { getMe } from './lib/apiWrapper'
 import Header from "./components/Header";
 import { Container } from "react-bootstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import CocktailDBView from "./views/CocktailDBView";
 
 
 function App() {
@@ -88,6 +89,9 @@ function App() {
           </Route>
           <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
             <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} flashMessage={flashMessage} />} />
+          </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage} />}>
+            <Route path='/cocktaildb/:idDrink' element={<CocktailDBView />} />
           </Route>
         </Routes>
       </Container>

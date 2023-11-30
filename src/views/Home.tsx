@@ -51,16 +51,19 @@ export default function Home({ loggedInUser }: HomeProps) {
 });
 
   return (
-    <div>
-      <h1 className='d-flex justify-content-center mt-5'>Welcome to The Cocktail Lounge</h1>
-      <h5 className='d-flex justify-content-center mt-3'>
-    Below is an alphabetically sorted list of cocktails sourced from&nbsp;
-    <a href='https://www.thecocktaildb.com/'>
-        <div>TheCocktailDb.com</div>
-    </a>
-  </h5>
-  <h5 className='d-flex justify-content-center mt-3'>The database currently holds {cocktailArray.length} Cocktails</h5>
-  <p className='d-flex justify-content-center mt-3'>Feel free to browse through the list, or visit&nbsp; <Link to='/cocktails'>User Creations</Link>&nbsp;to see what our Forum Users have created! </p>
+  <div>
+    <Row>
+      <Col className='col-12'>
+        <h1 className='d-flex justify-content-center mt-5'>Welcome to The Cocktail Lounge</h1>
+      </Col>
+      <Col className='col-12'>
+        <h5 className='d-flex justify-content-center mt-3'>Below is an alphabetically sorted list of cocktails sourced from&nbsp;<a href='https://www.thecocktaildb.com/'>TheCocktailDb.com</a></h5>
+      </Col>
+    <Col className='col-12'>
+    <h5 className='d-flex justify-content-center mt-3'>The database currently holds {cocktailArray.length} Cocktails</h5>
+    <p className='d-flex justify-content-center mt-3'>Feel free to browse through the list, or visit&nbsp; <Link to='/cocktails'>User Creations</Link>&nbsp;to see what our Forum Users have created!</p>
+    </Col>
+  </Row>
     {loading ? ( 
         <p>Loading...</p>
     ) : cocktails ? ( 

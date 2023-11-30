@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react';
 import { CocktailDBCocktail } from '../types/cocktaildb';
 import { Card } from 'react-bootstrap';
-import Button from 'react-bootstrap';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const itemsPerPage = 25;
+const itemsPerPage = 27;
 
 type CocktailListProps = {
     cocktailArray: CocktailDBCocktail[],
@@ -34,9 +34,10 @@ const CocktailList: React.FC<CocktailListProps> = ({ cocktailArray }) => {
             {currentItems.map(cocktail => (
                 <Col>
                     <Card className='cocktailsViewCard' key={cocktail.idDrink}>
-                        <Card.Body>
+                        <Card.Body >
                             <Card.Img className='cocktailDbImgHomePage img-fluid' src={cocktail.strDrinkThumb}></Card.Img>
-                            <Card.Title>{cocktail.strDrink}</Card.Title>
+                            <Card.Title className='mt-2'>{cocktail.strDrink}</Card.Title>
+                            <Link to={`/cocktaildb/${cocktail.idDrink}`}><Button variant='dark'>View More</Button></Link>
                         </Card.Body>
                     </Card>
                 </Col>
