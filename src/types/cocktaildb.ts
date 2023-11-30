@@ -4,7 +4,7 @@ export type CocktailDBCocktail = {
     idDrink: number,
     strDrink: string,
     strCategory: string,
-    strAlcholic: string,
+    strAlcoholic: string,
     strGlass: string,
     strInstructions: string,
     strDrinkThumb: string,

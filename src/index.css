@@ -145,3 +145,8 @@ body {
     height: 50px;
     width: 50px;
 }
+
+.cocktailViewCard{
+    background-color: #000c19;
+    color: #be4232
+}

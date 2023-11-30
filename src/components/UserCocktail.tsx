@@ -32,7 +32,7 @@ export default function CocktailView({ cocktail }: CocktailDetailsProps) {
 
   return (
     <>
-        <Card className='my-5'>
+        <Card className='my-5 cocktailViewCard'>
             <Card.Body>
                 <Card.Title>{ cocktail!.drinkName }</Card.Title>
                 <Card.Img className="cocktailsViewImg" src={ cocktail!.imageUrl }></Card.Img>
@@ -51,7 +51,8 @@ export default function CocktailView({ cocktail }: CocktailDetailsProps) {
                     ))}
                 </ul>
                 <Card.Text>Instructions: {cocktail!.instructions}</Card.Text>
-                <Card.Subtitle>By <Link to={`/profile/${cocktail.author.id}`}>{cocktail!.author.username}</Link></Card.Subtitle>
+                <Card.Subtitle>Created On {cocktail!.dateCreated}</Card.Subtitle>
+                <Card.Subtitle className="mt-3">By <Link to={`/profile/${cocktail.author.id}`}>{cocktail!.author.username}</Link></Card.Subtitle>
             </Card.Body>
         </Card>
     </>

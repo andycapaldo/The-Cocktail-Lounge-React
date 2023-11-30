@@ -1,6 +1,6 @@
 // View for viewing a specific cocktail in the 3rd party API by idDrink
 import { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import CocktailDbDetails from '../components/CocktailDbDetails';
 import { getSingleCocktail } from '../lib/thirdPartyApi';
 import CocktailDBArray from '../types/cocktaildb';

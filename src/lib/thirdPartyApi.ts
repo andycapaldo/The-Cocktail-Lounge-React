@@ -1,6 +1,6 @@
 import axios from 'axios';
 import APIResponse from '../types/api';
-import CocktailDBArray, { CocktailDBCocktail } from '../types/cocktaildb';
+import CocktailDBArray from '../types/cocktaildb';
 
 const base: string = 'https://thecocktaildb.com/api/json/v2/9973533'
 const allCocktailsEndpoint: string = '/search.php?s='
