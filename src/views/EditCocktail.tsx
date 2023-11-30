@@ -23,12 +23,6 @@ export default function EditCocktail({ currentUser, flashMessage }: EditCocktail
 
     const [cocktailToEdit, setCocktailToEdit] = useState<UserCocktailType|null>(null);
 
-    useEffect(() => {
-        if (!currentUser){
-            navigate('/')
-        }
-    }, [currentUser])
-
     useEffect( () => {
         async function getCocktailToEdit(){
             let response = await getUserCocktail(cocktailId!);

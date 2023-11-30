@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import LandingPage from './views/LandingPage';
 import Login from "./views/Login";
 import AlertMessage from "./components/AlertMessage";
+import PrivateRoutes from "./components/PrivateRoute";
 import SignUp from "./views/SignUp";
 import CocktailsView from "./views/CocktailsView";
 import EditCocktail from "./views/EditCocktail";
@@ -73,11 +74,21 @@ function App() {
           <Route path='/' element={<LandingPage/>}/>
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} flashMessage={flashMessage} />} />
-          <Route path='/home' element={<Home loggedInUser={loggedInUser} />} />
-          <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
-          <Route path='/editcocktail/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
-          <Route path='usercocktail/:cocktailId' element={<UserCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
-          <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} flashMessage={flashMessage} />} />
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage} />}>
+            <Route element={<Home loggedInUser={loggedInUser} />} path='/home' />
+          </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
+            <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
+          </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
+            <Route path='/editcocktail/:cocktailId' element={<EditCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
+          </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
+            <Route path='usercocktail/:cocktailId' element={<UserCocktail currentUser={loggedInUser} flashMessage={flashMessage} />} />
+          </Route>
+          <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
+            <Route path='/profile/:userId' element={<Profile loggedInUser={loggedInUser} flashMessage={flashMessage} />} />
+          </Route>
         </Routes>
       </Container>
     </BrowserRouter>
