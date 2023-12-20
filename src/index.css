@@ -177,4 +177,9 @@ body {
 
 .nav-link:focus, .nav-link:hover {
     color: #be4232;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.navbar-brand:focus, .navbar-brand:hover {
+    color: #be4232;
 }
