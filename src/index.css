@@ -157,8 +157,24 @@ body {
     max-height: 55px;
 }
 
-.my-nav {
-    display: flex !important;
-    justify-content: center !important;
+.bg-body-tertiary {
+    --bs-bg-opacity: 1;
+    background-color: #000c19 !important;
     color: #be4232 !important;
+}
+
+.navText {
+    color: #be4232;
+}
+
+.nav-link {
+    transition: none !important;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: #be4232;
 }
