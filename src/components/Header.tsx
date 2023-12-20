@@ -14,7 +14,7 @@ type HeaderProps = {
 
 export default function Header({ loggedInUser, isLoggedIn, handleLogOut }: HeaderProps) {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar sticky="top" expand="lg" className="bg-body-tertiary">
             <Container>
                 <Navbar.Brand as={Link} to='/home' className="navText"> <img src={logo} className="mainNavLogo"/>{' '}The Cocktail Lounge</Navbar.Brand>
                 <Nav className="d-flex justify-content-center">
