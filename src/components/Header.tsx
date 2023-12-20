@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { Link } from 'react-router-dom';
 import UserType from "../types/auth";
+import logo from '/logo.svg'
 
 
 type HeaderProps = {
@@ -13,9 +14,9 @@ type HeaderProps = {
 
 export default function Header({ loggedInUser, isLoggedIn, handleLogOut }: HeaderProps) {
     return (
-        <Navbar expand="lg" className="bg-body-tertiary">
+        <Navbar expand="lg" className="my-nav">
             <Container>
-                <Navbar.Brand as={Link} to='/home'>The Cocktail Lounge</Navbar.Brand>
+                <Navbar.Brand as={Link} to='/home'> <img src={logo} className="mainNavLogo"/>The Cocktail Lounge</Navbar.Brand>
                 <Nav className="me-auto">
                     <Nav.Link as={Link} to="/cocktails">User Creations</Nav.Link>
                     <Nav.Link as={Link} to={`/profile/${loggedInUser?.id}`}>Profile</Nav.Link>
