@@ -5,7 +5,6 @@ import Card from 'react-bootstrap/Card';
 import { Col } from 'react-bootstrap';
 
 import UserCocktailType from "../types/user_cocktail"
-import UserType from "../types/auth";
 
 type CocktailProps = {
     cocktail: UserCocktailType,

@@ -76,7 +76,7 @@ function App() {
           <Route path='/login' element={<Login logUserIn={logUserIn} isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />
           <Route path='/signup' element={<SignUp logUserIn={logUserIn} flashMessage={flashMessage} />} />
           <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage} />}>
-            <Route element={<Home loggedInUser={loggedInUser} />} path='/home' />
+            <Route element={<Home/>} path='/home' />
           </Route>
           <Route element={<PrivateRoutes isLoggedIn={isLoggedIn} flashMessage={flashMessage}  />}>
             <Route path='/cocktails' element={<CocktailsView isLoggedIn={isLoggedIn} flashMessage={flashMessage} />} />

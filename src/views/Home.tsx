@@ -1,19 +1,15 @@
 import { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import Card from 'react-bootstrap/Card';
-import UserType from "../types/auth";
 import CocktailDBArray from "../types/cocktaildb";
 import { getCocktails } from "../lib/thirdPartyApi";
 import CocktailList from "../components/CocktailDBList";
 import { Link } from "react-router-dom";
 
 
-type HomeProps = {
-    loggedInUser: Partial<UserType>|null
-}
 
 
-export default function Home({ loggedInUser }: HomeProps) {
+
+export default function Home() {
   const [cocktails, setCocktails] = useState<CocktailDBArray | null>(null);
   const [loading, setLoading] = useState(true);
   
